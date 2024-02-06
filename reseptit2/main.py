@@ -6,6 +6,7 @@ from sqlalchemy.orm import sessionmaker, \
     close_all_sessions
 
 
+
 @contextlib.contextmanager
 def get_db():
     engine = None
@@ -20,10 +21,7 @@ def get_db():
         print(e)
     finally:
         print("##### in get_db finally block")
-        if db_session is not None:
-            close_all_sessions()
-        if engine is not None:
-            engine.dispose()
+        db.close()
 
 
 def insert_categories_with_1_commit(number_of_categories=1000):
